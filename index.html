@@ -7,13 +7,21 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@1.8.0/viz.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.css" rel="stylesheet" integrity="sha384-bsHo4/LA+lkZv61JspMDQB9QP1TtO4IgOf2yYS+J6VdAYLVyx1c3XKcsHh0Vy8Ws" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.js" integrity="sha384-4z8mjH4yIpuK9dIQGR1JwbrfYsStrNK6MP+2Enhue4eyo0XlBDXOIPc8b6ZU0ajz" crossorigin="anonymous"></script>          <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.css">
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: '玫瑰星球',
-      repo: 'https://github.com/zrpstc/',
+      name: 'B-621星球',
+      repo: 'https://github.com/zrpstc/zrpstc.github.io',
+      auto2top: true,
+      ext: '.md',
+      nativeEmoji: true,
       loadNavbar: true,
       loadSidebar: true,
       subMaxLevel: 3,
@@ -23,21 +31,57 @@
         noData: '找不到结果',
         depth: 3,
       },
+    markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === "dot") {
+              return (
+                      '<div class="viz">'+ Viz(code, "SVG")+'</div>'
+              	);
+            }
+
+	    if (lang === "tex") {
+                    return (
+                        '<span class="tex">'+ katex.renderToString(code, {throwOnError: false})+'</span>'
+                        );
+            }
+
+            if (lang === "dot") {
+              return (
+                      '<div class="viz">'+ Viz(code, "SVG")+'</div>'
+              );
+            }
+
+
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+
+
     }
   </script>
+
+ <!-- jsDelivr -->
+<script src="https://cdn.jsdelivr.net/gh/Sumsung524/docsify-backTop/dist/docsify-backTop.min.js"></script>
+<!-- 本地引入 -->
+<script src="js/docsify-backTop.min.js"></script>
+
+
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <!-- 搜索插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <!-- 一键复制插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <!-- 图片缩放 -->  
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <!-- 代码高亮 -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-shell-session.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-http.min.js"></script>
+
   <!-- 主题 -->
   <!--<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/buble.css">-->
   <!--<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/dark.css">-->
